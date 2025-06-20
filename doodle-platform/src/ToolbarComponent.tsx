@@ -5,12 +5,19 @@ const PREDEFINED_COLORS = [
     "#d0b60a",
     "#e8e8e8",
 ];
+const BRUSH_SIZES = [
+    { size: 2, label: "S" },
+    { size: 5, label: "M" },
+    { size: 10, label: "L" },
+    { size: 20, label: "XL" },
+]
 interface ToolbarProps {
     selectedColor: string;
     onColorChange: (color: string) => void;
-
+    brushSize: number;
+    onBrushSizeChange: (size: number) => void;
 };
-const ToolbarComponent = ({ selectedColor, onColorChange }) => {
+const ToolbarComponent = ({ selectedColor, onColorChange, brushSize, onBrushSizeChange }) => {
     return (
         <div style={{
             display: "flex",
@@ -20,7 +27,7 @@ const ToolbarComponent = ({ selectedColor, onColorChange }) => {
             backgroundColor: "#f5f5f5",
             borderRadius: " 8px",
             margin: "0 auto",
-            maxWidth: "600px",
+            maxWidth: "800px",
 
         }}>
             {/* custom Color Picker*/}
@@ -43,9 +50,10 @@ const ToolbarComponent = ({ selectedColor, onColorChange }) => {
                 ></input>
             </div>
             {/* separator*/}
-            <div style={{ width: "2px", height: "40px", 
-                backgroundColor:"#ccc",
-                borderRadius:"4px",
+            <div style={{
+                width: "2px", height: "40px",
+                backgroundColor: "#ccc",
+                borderRadius: "4px",
             }}></div>
             {/* predefined Color Picker*/}
             <label style={{
@@ -69,7 +77,32 @@ const ToolbarComponent = ({ selectedColor, onColorChange }) => {
 
                 ></button>
             ))}
+            {/* separator*/}
+            <div style={{
+                width: "2px", height: "40px",
+                backgroundColor: "#ccc",
+                borderRadius: "4px",
+            }}></div>
+            <div style={{display:"flex",gap:"10px"}}>
+                <label>Brush Size:</label>
+                {BRUSH_SIZES.map(({size, label}) => (
+                    <button
+                        key={size}
+                        style={{
+                            padding:"8px 12px",
+                            borderRadius:"4px",
+                            border: "2px solid #6262fc",
 
+                            color: brushSize===size?"#fff":"#333",
+                            backgroundColor: brushSize === size ? "#6262fc" : "#ccc"
+                        }}
+                        onClick={() => onBrushSizeChange(size)}
+                        title={`${label}-${size}px`}
+                    >
+                        {label}
+                    </button>
+                ))}
+            </div>
         </div>
     )
 }

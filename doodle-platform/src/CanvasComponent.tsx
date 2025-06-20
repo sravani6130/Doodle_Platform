@@ -1,8 +1,9 @@
 import { useEffect, useRef, useState } from "react";
 type CanvasProps={
     selectedColor:string;
+    brushSize:number;
 };
-const CanvasComponent = ({selectedColor}:CanvasProps) => {
+const CanvasComponent = ({selectedColor,brushSize}:CanvasProps) => {
     const canvasRef = useRef<HTMLCanvasElement | null>(null);
     const [isDrawing, setIsDrawing] = useState(false);
     const [canvasContext, setCanvasContext] = useState<CanvasRenderingContext2D | null>(null);
@@ -28,8 +29,9 @@ const CanvasComponent = ({selectedColor}:CanvasProps) => {
         // console.log("changedcolor",selectedColor);
         if(canvasContext){
             canvasContext.strokeStyle =selectedColor;
+            canvasContext.lineWidth=brushSize;
         }
-    },[selectedColor,canvasContext]);
+    },[selectedColor,brushSize,canvasContext]);
     const getMouseCoordinates = (event) => {
         const canvas = canvasRef.current;
         if (!canvas) {
