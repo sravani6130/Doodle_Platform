@@ -43,7 +43,7 @@ const CanvasComponent = ({selectedColor}:CanvasProps) => {
         }
     }
     const startDrawing = (event: React.MouseEvent<HTMLCanvasElement>) => {
-        console.log("staart");
+        // console.log("staart");
         if (!canvasContext) {
             return;
         }
@@ -54,14 +54,14 @@ const CanvasComponent = ({selectedColor}:CanvasProps) => {
         setIsDrawing(true);
     };
     const draw = (event: React.MouseEvent<HTMLCanvasElement>) => {
-        console.log("draw");
+        // console.log("draw");
         if (!isDrawing || !canvasContext) return;
         const { x, y } = getMouseCoordinates(event);
         canvasContext.lineTo(x, y);
         canvasContext.stroke();
     };
     const stopDrawing = () => {
-        console.log("stop");
+        // console.log("stop");
         if (!canvasContext) {
             return;
         }
